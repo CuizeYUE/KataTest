@@ -75,7 +75,7 @@ public class FirstClass {
         ArrayList<String> arrayList_a = new ArrayList<>();
         ArrayList<String> arrayList_b = new ArrayList<>();
 
-        for(int i=guerriers.length-1;i>=0;i--){
+        for(int i=0;i<guerriers.length;i++){
 //arrayListToArray
            if(getSumValue(arrayList_a.toArray(new String[0])) < getSumValue(arrayList_b.toArray(new String[0]))){
                 arrayList_a.add(guerriers[i]);
@@ -83,8 +83,8 @@ public class FirstClass {
                 arrayList_b.add(guerriers[i]);
             }
         }
-        solution.setFirstArray(arrayList_a.toArray(new String[arrayList_a.size()]));
-        solution.setSecondArray(arrayList_a.toArray(new String[arrayList_b.size()]));
+        solution.setFirstArray(arrayList_a.toArray(new String[0]));
+        solution.setSecondArray(arrayList_b.toArray(new String[0]));
         return solution;
     }
 

@@ -73,8 +73,8 @@ public class TestKata {
         for (int i=0;i<secondArray.length;i++){
             secondSolution = secondSolution + secondArray[i]+":";
         }
-        assertEquals(solutionArray1,secondSolution);
         assertEquals(solutionArray2,firstSolution);
+        assertEquals(solutionArray1,secondSolution);
     }
 
 }
