@@ -59,9 +59,9 @@ public class FirstClass {
                     break;
             }
         }
-        sum = sumHero>sumTraitre?
-                sum - sumTraitre*4:
-                sum - sumHero*4;
+        sum = sumHero>0?
+                sum - sumTraitre*1:
+                sum;
 
         if(sumMage>0){
             sum = sum+(guerriers.length-sumMage)*sumMage;
