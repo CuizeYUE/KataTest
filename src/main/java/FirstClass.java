@@ -71,12 +71,18 @@ public class FirstClass {
 
     public Solution findAllSolution(ArrayList<String> gurrieurs){
         Solution solution = this.find1_6(gurrieurs);
-        if(solution == null){
-            solution = this.find2_5(gurrieurs);
-            if(solution == null){
-                solution = this.find3_4(gurrieurs);
-            }
+        if(solution != null) {
+            return solution;
         }
+        solution = this.find2_5(gurrieurs);
+        if(solution != null) {
+            return solution;
+        }
+        solution = this.find3_4(gurrieurs);
+        if(solution != null) {
+            return solution;
+        }
+
         return solution;
     }
 
