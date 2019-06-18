@@ -1,47 +1,31 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
 
 
 public class TestKata {
-    String guerriers_1[] = {"HERO", "HERO", "HERO", "CAPITAINE", "SOLDAT", "SOLDAT", "SOLDAT"};
-    String guerriers_2[] = {"HERO", "HERO", "CAPITAINE", "CAPITAINE", "CAPITAINE", "CAPITAINE", "TRAITRE"};
-    String guerriers_3[] = {"HERO", "HERO", "HERO", "CAPITAINE", "CAPITAINE", "CAPITAINE", "MAUDIT"};
-    String guerriers_4[] = {"HERO", "HERO", "HERO", "HERO", "SOLDAT", "TRAITRE", "MAUDIT"};
-    String guerriers_5[] = {"SOLDAT", "SOLDAT", "SOLDAT", "SOLDAT", "SOLDAT", "SOLDAT", "MAGE"};
-    String guerriers_6[] = {"HERO", "HERO", "CAPITAINE", "SOLDAT", "SOLDAT", "SOLDAT", "MAGE"};
-    String guerriers_7[] = {"HERO", "HERO", "CAPITAINE", "SOLDAT", "SOLDAT", "MAUDIT", "MAGE"};
-    String guerriers_8[] = {"HERO", "CAPITAINE", "CAPITAINE", "CAPITAINE", "MAUDIT", "MAUDIT", "MAGE"};
-    String guerriers_9[] = {"HERO", "HERO", "CAPITAINE", "CAPITAINE", "SOLDAT", "TRAITRE", "MAGE"};
-    String guerriers_10[] = {"HERO", "HERO", "CAPITAINE", "TRAITRE", "TRAITRE", "TRAITRE", "MAGE"};
-    String guerriers_11[] = {"HERO", "HERO", "CAPITAINE", "CAPITAINE", "TRAITRE", "MAUDIT", "MAGE"};
-    String guerriers_12[] = {"HERO", "HERO", "SOLDAT", "SOLDAT", "TRAITRE", "MAGE", "MAGE"};
-    String guerriers_13[] = {"SOLDAT", "MAUDIT", "MAUDIT", "MAGE", "MAGE", "MAGE", "MAGE"};
-    String guerriers_14[] = {"HERO", "CAPITAINE", "CAPITAINE", "TRAITRE", "MAGE", "MAGE", "MAGE"};
-    String guerriers_15[] = {"HERO", "SOLDAT", "TRAITRE", "TRAITRE", "MAGE", "MAGE", "MAGE"};
-
 
     FirstClass firstSolution = new FirstClass();
 
     @ParameterizedTest
     @CsvSource({
             "HERO:HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:SOLDAT, 14",
-            "HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:CAPITAINE:TRAITRE, 14",
+            "HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:CAPITAINE:TRAITRE, 12",
             "HERO:HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:MAUDIT, 14",
-            "HERO:HERO:HERO:HERO:SOLDAT:TRAITRE:MAUDIT, 12",
+            "HERO:HERO:HERO:HERO:SOLDAT:TRAITRE:MAUDIT, 10",
             "SOLDAT:SOLDAT:SOLDAT:SOLDAT:SOLDAT:SOLDAT:MAGE, 12",
             "HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:SOLDAT:MAGE, 17",
             "HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:MAUDIT:MAGE, 15",
             "HERO:CAPITAINE:CAPITAINE:CAPITAINE:MAUDIT:MAUDIT:MAGE, 13",
-            "HERO:HERO:CAPITAINE:CAPITAINE:SOLDAT:TRAITRE:MAGE, 17",
-            "HERO:HERO:CAPITAINE:TRAITRE:TRAITRE:TRAITRE:MAGE, 18",
-            "HERO:HERO:CAPITAINE:CAPITAINE:TRAITRE:MAUDIT:MAGE, 15",
-            "HERO:HERO:SOLDAT:SOLDAT:TRAITRE:MAGE:MAGE, 18",
+            "HERO:HERO:CAPITAINE:CAPITAINE:SOLDAT:TRAITRE:MAGE, 15",
+            "HERO:HERO:CAPITAINE:TRAITRE:TRAITRE:TRAITRE:MAGE, 11",
+            "HERO:HERO:CAPITAINE:CAPITAINE:TRAITRE:MAUDIT:MAGE, 13",
+            "HERO:HERO:SOLDAT:SOLDAT:TRAITRE:MAGE:MAGE, 16",
             "SOLDAT:MAUDIT:MAUDIT:MAGE:MAGE:MAGE:MAGE, 11",
-            "HERO:CAPITAINE:CAPITAINE:TRAITRE:MAGE:MAGE:MAGE, 19",
-            "HERO:SOLDAT:TRAITRE:TRAITRE:MAGE:MAGE:MAGE, 20"
+            "HERO:CAPITAINE:CAPITAINE:TRAITRE:MAGE:MAGE:MAGE, 17",
+            "HERO:SOLDAT:TRAITRE:TRAITRE:MAGE:MAGE:MAGE, 15"
     })
     public void testSumGurriers(String guerriers,int sum){
 
@@ -51,31 +35,31 @@ public class TestKata {
         assertEquals(exceptSum,sum);
     }
 
-    public double getSolution(){
-        return -1;
-    }
-
     @ParameterizedTest
     @CsvSource({
-            "HERO:HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:SOLDAT, HERO:HERO:SOLDAT:, HERO:CAPITAINE:SOLDAT:SOLDAT:",
-            "HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:CAPITAINE:TRAITRE, HERO:HERO:SOLDAT:, HERO:CAPITAINE:SOLDAT:SOLDAT:"
+            "HERO:HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:SOLDAT",
+            "HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:CAPITAINE:TRAITRE",
+            "HERO:HERO:HERO:CAPITAINE:CAPITAINE:CAPITAINE:MAUDIT",
+            "HERO:HERO:HERO:HERO:SOLDAT:TRAITRE:MAUDIT",
+            "SOLDAT:SOLDAT:SOLDAT:SOLDAT:SOLDAT:SOLDAT:MAGE",
+            "HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:SOLDAT:MAGE",
+            "HERO:HERO:CAPITAINE:SOLDAT:SOLDAT:MAUDIT:MAGE",
+            "HERO:CAPITAINE:CAPITAINE:CAPITAINE:MAUDIT:MAUDIT:MAGE",
+            "HERO:HERO:CAPITAINE:CAPITAINE:SOLDAT:TRAITRE:MAGE",
+            "HERO:HERO:CAPITAINE:TRAITRE:TRAITRE:TRAITRE:MAGE",
+            "HERO:HERO:CAPITAINE:CAPITAINE:TRAITRE:MAUDIT:MAGE",
+            "HERO:HERO:SOLDAT:SOLDAT:TRAITRE:MAGE:MAGE",
+            "SOLDAT:MAUDIT:MAUDIT:MAGE:MAGE:MAGE:MAGE",
+            "HERO:CAPITAINE:CAPITAINE:TRAITRE:MAGE:MAGE:MAGE",
+            "HERO:SOLDAT:TRAITRE:TRAITRE:MAGE:MAGE:MAGE"
+
     })
-    public void testSolution(String guerriers, String solutionArray1, String solutionArray2){
+    public void testSolution(String guerriers){
         String[] spl = guerriers.split(":");
         Solution solution = firstSolution.getSolution(spl);
-        String[] firstArray = solution.getFirstArray();
-        String[] secondArray = solution.getSecondArray();
 
-        String firstSolution = "";
-        for (int i=0;i<firstArray.length;i++){
-            firstSolution = firstSolution + firstArray[i]+":";
-        }
-        String secondSolution = "";
-        for (int i=0;i<secondArray.length;i++){
-            secondSolution = secondSolution + secondArray[i]+":";
-        }
-        assertEquals(solutionArray2,firstSolution);
-        assertEquals(solutionArray1,secondSolution);
+        assertEquals(solution.ifSumEquels(),true);
+        System.out.println(Arrays.toString(solution.getFirstArray())+" : "+Arrays.toString(solution.getSecondArray()));
     }
 
 }

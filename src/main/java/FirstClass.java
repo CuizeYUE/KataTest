@@ -1,34 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FirstClass {
-//    public enum Guerrier{
-//        HERO("HERO",3),
-//        CAPITAINE("CAPITAINE",2),
-//        SOLDAT("SOLDAT",1);
-//
-//        Guerrier(String name, int value){
-//            this.name = name;
-//            this.value = value;
-//        }
-//        private String name;
-//        private int value;
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public void setName(String name) {
-//            this.name = name;
-//        }
-//
-//        public int getValue() {
-//            return value;
-//        }
-//
-//        public void setValue(int value) {
-//            this.value = value;
-//        }
-//    }
 
     public int getSumValue(String[] guerriers){
         int sumHero = 0;
@@ -59,9 +32,9 @@ public class FirstClass {
                     break;
             }
         }
-        sum = sumHero>0?
-                sum - sumTraitre*1:
-                sum;
+        sum = sumHero>sumTraitre?
+                sum - sumTraitre*3:
+                sum - sumHero*3;
 
         if(sumMage>0){
             sum = sum+(guerriers.length-sumMage)*sumMage;
@@ -70,22 +43,101 @@ public class FirstClass {
     }
 
     public Solution getSolution(String[] guerriers){
-        Solution solution = new Solution();
-
         ArrayList<String> arrayList_a = new ArrayList<>();
         ArrayList<String> arrayList_b = new ArrayList<>();
+        ArrayList<String> guerrierList = new ArrayList<String>(Arrays.asList(guerriers));
+        Solution solution = this.methodLazy(guerrierList, arrayList_a, arrayList_b);
 
-        for(int i=0;i<guerriers.length;i++){
-//arrayListToArray
-           if(getSumValue(arrayList_a.toArray(new String[0])) < getSumValue(arrayList_b.toArray(new String[0]))){
-                arrayList_a.add(guerriers[i]);
+        return solution;
+    }
+
+    public Solution methodLazy(ArrayList<String> guerrierList, ArrayList<String>arrayList_a, ArrayList<String>arrayList_b){
+        Solution solution = new Solution();
+        //lazy algorithm
+        for(int i=0;i<guerrierList.size();i++){
+            if(getSumValue(arrayList_a.toArray(new String[0])) < getSumValue(arrayList_b.toArray(new String[0]))){
+                arrayList_a.add(guerrierList.get(i));
             }else{
-                arrayList_b.add(guerriers[i]);
+                arrayList_b.add(guerrierList.get(i));
             }
         }
         solution.setFirstArray(arrayList_a.toArray(new String[0]));
         solution.setSecondArray(arrayList_b.toArray(new String[0]));
+        if(!solution.ifSumEquels()){
+            return this.findAllSolution(guerrierList);
+        }
         return solution;
     }
 
+    public Solution findAllSolution(ArrayList<String> gurrieurs){
+        Solution solution = this.find1_6(gurrieurs);
+        if(solution == null){
+            solution = this.find2_5(gurrieurs);
+            if(solution == null){
+                solution = this.find3_4(gurrieurs);
+            }
+        }
+        return solution;
+    }
+
+    public Solution find1_6(ArrayList<String> gurriers){
+        Solution solution = new Solution();
+        for (int i = 0; i <7; i++) {
+            ArrayList<String> arrayList_a = new ArrayList<>();
+            ArrayList<String> gurriers_copy = new ArrayList<>(gurriers);
+            arrayList_a.add(gurriers.get(i));
+            gurriers_copy.remove(i);
+            solution.setFirstArray(arrayList_a.toArray(new String[0]));
+            solution.setSecondArray(gurriers_copy.toArray(new String[0]));
+            if(solution.ifSumEquels()){
+                return solution;
+            }
+        }
+        return null;
+    }
+
+    public Solution find2_5(ArrayList<String> gurriers){
+        Solution solution = new Solution();
+        for(int i=0;i<7;i++){
+            ArrayList<String> arrayList_a = new ArrayList<>();
+            arrayList_a.add(gurriers.get(i));
+            for(int j=0;j<6;j++){
+                ArrayList<String> gurriers_copy = new ArrayList<>(gurriers);
+                gurriers_copy.remove(i);
+                arrayList_a.add(gurriers.get(j));
+                gurriers_copy.remove(j);
+                solution.setFirstArray(arrayList_a.toArray(new String[0]));
+                solution.setSecondArray(gurriers_copy.toArray(new String[0]));
+                if(solution.ifSumEquels()){
+                    return solution;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Solution find3_4(ArrayList<String> gurriers){
+        Solution solution = new Solution();
+        for(int i=0;i<7;i++){
+            ArrayList<String> arrayList_a = new ArrayList<>();
+            arrayList_a.add(gurriers.get(i));
+            for(int j=0;j<6;j++){
+                ArrayList<String> gurriers_copy = new ArrayList<>(gurriers);
+                gurriers_copy.remove(i);
+                arrayList_a.add(gurriers.get(j));
+                    for(int k=0;k<5;k++){
+                        ArrayList<String> gurriers_copy_2 = new ArrayList<>(gurriers_copy);
+                        gurriers_copy_2.remove(j);
+                        arrayList_a.add(gurriers_copy_2.get(k));
+                        gurriers_copy_2.remove(k);
+                        solution.setFirstArray(arrayList_a.toArray(new String[0]));
+                        solution.setSecondArray(gurriers_copy_2.toArray(new String[0]));
+                        if(solution.ifSumEquels()){
+                            return solution;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
